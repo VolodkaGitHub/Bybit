@@ -62,22 +62,17 @@ function PageContent() {
               { label: "Oluvchi", value: values.receiver },
               { label: "Karta raqami", value: values.cardNumber },
             ].map(({ label, value }) => (
-              <div key={label}>
-                <label className="block text-sm text-[#999999] mb-1">{label}:</label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={value}
-                    readOnly
-                    className="w-full px-3 py-2 pr-10 border-2 border-[#444] rounded-md bg-black text-white focus:outline-none focus:ring-2 focus:ring-[#ff9900]"
-                  />
+              <div key={label} className="rounded-md bg-black px-3 py-2 space-y-1">
+                <div className="text-sm text-[#999999]">{label}:</div>
+                <div className="flex items-center justify-between">
+                  <div className="text-white break-all">{value}</div>
                   <button
                     onClick={() => handleCopy(value)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-[#ff9900] hover:text-white cursor-pointer group"
+                    className="ml-4 p-1 text-[#ff9900] hover:text-white cursor-pointer group relative"
                     aria-label={`Copy ${label}`}
                   >
                     <DocumentDuplicateIcon className="h-5 w-5" />
-                    <span className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 text-xs text-white bg-[#333] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 text-xs text-white bg-[#333] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                       Nusxalash
                     </span>
                   </button>
