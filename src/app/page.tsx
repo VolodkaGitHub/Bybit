@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 
-export default function Page() {
+function PageContent() {
   const searchParams = useSearchParams();
   const encoded = searchParams.get('data');
 
@@ -88,5 +88,13 @@ export default function Page() {
         </section>
       </div>
     </main>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={null}>
+      <PageContent />
+    </Suspense>
   );
 }
