@@ -38,7 +38,7 @@ function PageContent() {
       <div className="bg-black shadow-lg rounded-xl w-full max-w-2xl border-2 border-[#ff9900]">
 
         <div className="flex justify-center pt-8">
-          <img src="/bybit-logo.jpg" alt="O'zbekiston gerbi" className="h-20 rounded-full" />
+          <img src="/bybit-logo.jpg" alt="O'zbekiston gerbi" className="h-30 rounded-full" />
         </div>
 
         <div className="text-center space-y-1 px-8">
