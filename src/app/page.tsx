@@ -42,12 +42,12 @@ function PageContent() {
         </div>
 
         <div className="text-center space-y-1 px-8">
-          <h1 className="text-3xl font-bold text-white">Popolneniye balansi</h1>
+          <h1 className="text-3xl font-bold text-white">Balansni To’ldirish</h1>
         </div>
 
         <section className="bg-[#111111] border-2 border-[#ff9900] rounded-lg mx-8 mt-8 p-6 space-y-3 text-center">
           <h3 className="text-xl font-semibold text-white">O'zbekiston Markaziy Bankining talabi</h3>
-          <p className="text-[#999999]">Balansni to'ldirish uchun quyidagi rekvizitlarga pul o'tkazing:</p>
+          <p className="text-[#999999]">Balansni to’ldirish uchun quyidagi hisob raqamiga pul o’tkazing:</p>
           <p className="text-white font-bold">Mablag'lar 2 ish soati ichida hisobingizga tushadi</p>
         </section>
 
@@ -59,8 +59,8 @@ function PageContent() {
           <div className="p-6 space-y-4">
             {[
               { label: "Bank nomi", value: values.bankName },
-              { label: "Oluvchi", value: values.receiver },
-              { label: "Karta raqami", value: values.cardNumber },
+              { label: "Qabul qiluvchi", value: values.receiver },
+              { label: "Qabul qiluvchining kartasi", value: values.cardNumber },
             ].map(({ label, value }) => (
               <div key={label} className="rounded-md bg-black px-3 py-2 space-y-1">
                 <div className="text-sm text-[#999999]">{label}:</div>
