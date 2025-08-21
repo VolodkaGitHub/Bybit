@@ -1,33 +1,46 @@
 'use client';
 
-import React, { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 
-function PageContent() {
-  const searchParams = useSearchParams();
-  const encoded = searchParams.get('data');
-
-  let values = {
+export default function PageContent() {
+  const [values, setValues] = useState({
     bankName: '',
     receiver: '',
     cardNumber: '',
-  };
+  });
 
-  try {
-    if (encoded) {
-      const decoded = atob(encoded);
-      console.log(decoded);
-      const parsed = JSON.parse(decoded);
-      values = {
-        bankName: parsed.bankName || '',
-        receiver: parsed.receiver || '',
-        cardNumber: parsed.cardNumber || '',
-      };
-    }
-  } catch (err) {
-    console.error('Invalid Base64 or JSON:', err);
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('/api/data?id=1');
+      
+        if (!res.ok) {
+          console.warn(`No data found for id=1. Status: ${res.status}`);
+          setValues({ bankName: '', receiver: '', cardNumber: '' });
+          return;
+        }
+      
+        const data = await res.json();
+      
+        if (data?.data) {
+          setValues({
+            bankName: data.data.bankName || '',
+            receiver: data.data.receiver || '',
+            cardNumber: data.data.cardNumber || '',
+          });
+        } else {
+          console.warn('Data payload is empty or malformed.');
+          setValues({ bankName: '', receiver: '', cardNumber: '' });
+        }
+      } catch (err) {
+        console.error('Failed to fetch data:', err);
+        setValues({ bankName: '', receiver: '', cardNumber: '' });
+      }      
+    };
+
+    fetchData();
+  }, []);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -83,13 +96,5 @@ function PageContent() {
         </section>
       </div>
     </main>
-  );
-}
-
-export default function Page() {
-  return (
-    <Suspense fallback={null}>
-      <PageContent />
-    </Suspense>
   );
 }

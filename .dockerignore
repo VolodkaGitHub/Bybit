@@ -1,0 +1,24 @@
+# Node modules and build artifacts
+node_modules
+.next
+dist
+
+# Logs and temp files
+npm-debug.log
+yarn-error.log
+*.log
+*.tmp
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Git and Docker files
+.git
+.gitignore
+.dockerignore
+
+# Env files (optional — only if you inject env vars via docker-compose)
+.env
+.env.local
+.env.production

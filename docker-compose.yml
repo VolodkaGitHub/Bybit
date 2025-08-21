@@ -1,0 +1,59 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: bybit-db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bybit-app
+    restart: always
+    working_dir: /app
+    command: npm run dev
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    networks:
+      - backend
+
+  telebot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bybit-telebot
+    restart: always
+    working_dir: /app
+    command: npx tsx src/telebot/index.ts
+    depends_on:
+      - app
+      - postgres
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    networks:
+      - backend
+
+volumes:
+  pgdata:
+  node_modules:
+
+networks:
+  backend:
